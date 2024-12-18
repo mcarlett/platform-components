@@ -1,0 +1,7 @@
+clusterRouterDomain: apps.example.cluster.com
+minioEndpoint: https://minio.minio.svc.cluster.local/
+minioBucket: tempostack
+minioKey: minio
+minioSecret: minio123
+minioK8sSecretName: operator-ca-tls-minio
+minioK8sNamespace: minio
