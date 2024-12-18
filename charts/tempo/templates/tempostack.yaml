@@ -1,0 +1,27 @@
+apiVersion: tempo.grafana.com/v1alpha1
+kind: TempoStack
+metadata:
+  name: tempostack
+  namespace: {{ .Release.Namespace }}
+spec:
+  resources:
+    total:
+      limits:
+        cpu: '2'
+        memory: 2Gi
+  managementState: Managed
+  storage:
+    secret:
+      name: minio-secret-tempostack
+      type: s3
+    tls:
+      enabled: true
+      caName: minio-ca-tempostack
+  storageSize: 1Gi
+  replicationFactor: 1
+  template:
+    queryFrontend:
+      jaegerQuery:
+        enabled: true
+        ingress:
+          type: route

@@ -1,0 +1,10 @@
+{{- $minioSecret := (lookup "v1" "Secret" .Values.minioK8sNamespace .Values.minioK8sSecretName) }}
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: minio-ca-tempostack
+  namespace: {{ .Release.Namespace }}
+data:
+  # from operator-ca-tls-minio secret ca.crt key on minio ns
+  service-ca.crt: |-
+    {{- index $minioSecret.data "ca.crt"}}
